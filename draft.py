@@ -20,7 +20,7 @@ if not input_file:
 #read the file and set it in a dataframe without setting a header
 excel_data = pd.read_excel(input_file, header=None)
 
-#remove the first 14 rows 
+#remove the first 14 rows
 data_clean_headers = excel_data.iloc[14:].reset_index(drop=True)
 
 #make the 15th row, the new header
@@ -36,8 +36,9 @@ cols_to_remove = [2, 4, 5, 12]
 #df = df.drop(specify cols to drop df.columns[cols_to_remove], axis=1)
 final_data = data_clean_headers.drop(data_clean_headers.columns[cols_to_remove], axis=1)
 
+#filter column I (8) completed values and remove
+#filter final_data in col 8 to the values NOT "Completed" now final_data only has other than "not completed"
+final_data = final_data[final_data.iloc[:,8] != "Completed"]
+
 #save the modified file
 final_data.to_excel(input_file, index=False)
-
-print("This is the end")
-input("Press Enter to exit")
