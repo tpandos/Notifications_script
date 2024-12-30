@@ -1,11 +1,20 @@
 import tkinter as tk
 from tkinter import filedialog
 import pandas as pd 
+from tkinter import messagebox
 
 #get the promt window to open to choose file
 
 root = tk.Tk()
 root.withdraw()
+
+response = messagebox.askyesno("Confirm Action ", "Are you sure you want to continue?")
+
+if response:
+    print("Action confirmed, Executing script")
+else:
+    print("Action cancelled. Exiting...")
+    exit()
 
 input_file = filedialog.askopenfilename(
     title="Select Excel File", 
@@ -61,3 +70,4 @@ for value in unique_values:
     split_df.to_excel(output_file, index=False)
 
 print(f"Filtered file for '{value}' saved as: {output_file}")
+
